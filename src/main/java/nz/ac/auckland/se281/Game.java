@@ -29,13 +29,20 @@ public class Game {
 
   private void askForFingers() {
     MessageCli.ASK_INPUT.printMessage();
-    String input = Utils.scanner.nextLine(); // Read input from the user
 
-    try {
-      int fingers = Integer.parseInt(input); // Convert input to integer
-      MessageCli.PRINT_INFO_HAND.printMessage(this.playerName, String.valueOf(fingers));
-    } catch (NumberFormatException e) {
-      MessageCli.INVALID_INPUT.printMessage();
+    while (true) {
+      String input = Utils.scanner.nextLine();
+      try {
+        int fingers = Integer.parseInt(input);
+        if (fingers >= 0) {
+          MessageCli.PRINT_INFO_HAND.printMessage(this.playerName, Integer.toString(fingers));
+          break;
+        } else {
+          MessageCli.INVALID_INPUT.printMessage();
+        }
+      } catch (NumberFormatException e) {
+        MessageCli.INVALID_INPUT.printMessage();
+      }
     }
   }
 
