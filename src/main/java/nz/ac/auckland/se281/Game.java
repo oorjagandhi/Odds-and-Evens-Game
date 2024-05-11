@@ -34,7 +34,7 @@ public class Game {
       String input = Utils.scanner.nextLine();
       try {
         int fingers = Integer.parseInt(input);
-        if (fingers >= 0) {
+        if (fingers >= 0 && fingers <= 5) {
           MessageCli.PRINT_INFO_HAND.printMessage(this.playerName, Integer.toString(fingers));
           break;
         } else {
