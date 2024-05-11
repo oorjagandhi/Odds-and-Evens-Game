@@ -27,8 +27,16 @@ public class Game {
     askForFingers();
   }
 
-  public void askForFingers() {
+  private void askForFingers() {
     MessageCli.ASK_INPUT.printMessage();
+    String input = Utils.scanner.nextLine(); // Read input from the user
+
+    try {
+      int fingers = Integer.parseInt(input); // Convert input to integer
+      MessageCli.PRINT_INFO_HAND.printMessage(this.playerName, String.valueOf(fingers));
+    } catch (NumberFormatException e) {
+      MessageCli.INVALID_INPUT.printMessage();
+    }
   }
 
   public void endGame() {}
