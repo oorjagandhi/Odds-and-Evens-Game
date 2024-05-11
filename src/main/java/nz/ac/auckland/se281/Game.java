@@ -18,12 +18,17 @@ public class Game {
     this.roundNumber = 0;
 
     // Welcome the player
-    MessageCli.WELCOME_PLAYER.printMessage(options[0]);
+    MessageCli.WELCOME_PLAYER.printMessage(playerName);
   }
 
   public void play() {
     this.roundNumber++;
     MessageCli.START_ROUND.printMessage(String.valueOf(this.roundNumber));
+    askForFingers();
+  }
+
+  public void askForFingers() {
+    MessageCli.ASK_INPUT.printMessage();
   }
 
   public void endGame() {}
