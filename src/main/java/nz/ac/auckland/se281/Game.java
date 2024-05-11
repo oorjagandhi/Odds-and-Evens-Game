@@ -34,6 +34,20 @@ public class Game {
     int sum = playerAction + hal9000Action;
 
     Choice sumOddOrEven;
+
+    if (sum % 2 == 0) {
+      sumOddOrEven = Choice.EVEN;
+    } else {
+      sumOddOrEven = Choice.ODD;
+    }
+
+    if (playerChoice == sumOddOrEven) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+          Integer.toString(sum), playerChoice.name(), playerName);
+    } else {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+          Integer.toString(sum), playerChoice.name(), "HAL-9000");
+    }
   }
 
   public void endGame() {}
