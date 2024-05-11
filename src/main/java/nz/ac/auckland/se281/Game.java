@@ -7,15 +7,12 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Game {
   private int roundNumber;
   private String playerName;
-  private Difficulty difficulty;
   private Choice playerChoice;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
-    // the first element of options[0]; is the name of the player
-    this.playerName = options[0];
-    this.difficulty = difficulty;
-    this.playerChoice = choice;
     this.roundNumber = 0;
+    this.playerChoice = choice;
+    this.playerName = options[0];
 
     // Welcome the player
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
@@ -24,26 +21,19 @@ public class Game {
   public void play() {
     this.roundNumber++;
     MessageCli.START_ROUND.printMessage(String.valueOf(this.roundNumber));
-    askForFingers();
-  }
 
-  private void askForFingers() {
-    MessageCli.ASK_INPUT.printMessage();
+    Player player = new Player();
+    HAL9000 hal9000 = new HAL9000(new RandomStrategy());
 
-    while (true) {
-      String input = Utils.scanner.nextLine();
-      try {
-        int fingers = Integer.parseInt(input);
-        if (fingers >= 0 && fingers <= 5) {
-          MessageCli.PRINT_INFO_HAND.printMessage(this.playerName, Integer.toString(fingers));
-          break;
-        } else {
-          MessageCli.INVALID_INPUT.printMessage();
-        }
-      } catch (NumberFormatException e) {
-        MessageCli.INVALID_INPUT.printMessage();
-      }
-    }
+    int playerAction = player.play();
+    int hal9000Action = hal9000.play();
+
+    MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(playerAction));
+    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(hal9000Action));
+
+    int sum = playerAction + hal9000Action;
+
+    Choice sumOddOrEven;
   }
 
   public void endGame() {}
