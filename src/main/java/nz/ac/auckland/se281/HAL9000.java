@@ -38,10 +38,13 @@ public class HAL9000 {
       case HARD:
         if (this.roundCount > 3) { // After the third round, decide based on the last round
           if (!lastRoundWon) { // Switch strategy if HAL9000 lost the last round
-            this.strategy =
-                this.strategy instanceof TopStrategy
-                    ? randomStrategy
-                    : new TopStrategy(evenCount, oddCount, playerChoice);
+            if (this.strategy instanceof TopStrategy) {
+              // If the current strategy is TopStrategy, switch to RandomStrategy
+              this.strategy = randomStrategy;
+            } else {
+              // If the current strategy is not TopStrategy, switch to a new instance of TopStrategy
+              this.strategy = new TopStrategy(evenCount, oddCount, playerChoice);
+            }
           }
         }
         break;
@@ -60,7 +63,7 @@ public class HAL9000 {
       oddCount++;
     }
 
-    this.lastRoundWon = true;
+    this.lastRoundWon = won;
   }
 
   public void reset() {
