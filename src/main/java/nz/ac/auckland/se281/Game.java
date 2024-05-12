@@ -10,6 +10,7 @@ public class Game {
   private Choice playerChoice;
   private HAL9000 hal9000;
   private boolean gameHasStarted;
+  private int playerWinCount;
 
   /**
    * The new game method is called to start a new game of Odds and Evens.
@@ -26,6 +27,7 @@ public class Game {
     this.playerName = options[0];
 
     gameHasStarted = true;
+    playerWinCount = 0;
 
     // Create the AI based on the difficulty and choice
     this.hal9000 = AIFactory.createAi(difficulty, choice);
@@ -56,7 +58,8 @@ public class Game {
       boolean playerWins = (playerChoice == sumOddOrEven);
       hal9000.updateCounts(playerAction, !playerWins);
 
-      if (playerChoice == sumOddOrEven) {
+      if (playerWins) {
+        playerWinCount++;
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             Integer.toString(sum), sumOddOrEven.name(), playerName);
       } else {
@@ -70,5 +73,18 @@ public class Game {
 
   public void endGame() {}
 
-  public void showStats() {}
+  public void showStats() {
+    if (gameHasStarted) {
+      MessageCli.PRINT_PLAYER_WINS.printMessage(
+          playerName,
+          Integer.toString(playerWinCount),
+          Integer.toString(roundNumber - playerWinCount));
+      MessageCli.PRINT_PLAYER_WINS.printMessage(
+          "HAL-9000",
+          Integer.toString(hal9000.getWinCount()),
+          Integer.toString(roundNumber - playerWinCount));
+    } else {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+    }
+  }
 }

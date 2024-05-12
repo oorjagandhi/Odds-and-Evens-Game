@@ -118,7 +118,7 @@ public class HAL9000 {
    *
    * @return The number of wins.
    */
-  public int winCount() {
+  public int getWinCount() {
     return this.winCount;
   }
 }
