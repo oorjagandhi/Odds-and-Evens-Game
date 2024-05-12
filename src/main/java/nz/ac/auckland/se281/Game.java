@@ -8,11 +8,13 @@ public class Game {
   private int roundNumber;
   private String playerName;
   private Choice playerChoice;
+  private Difficulty difficulty;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     this.roundNumber = 0;
     this.playerChoice = choice;
     this.playerName = options[0];
+    this.difficulty = difficulty;
 
     // Welcome the player
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
@@ -23,7 +25,7 @@ public class Game {
     MessageCli.START_ROUND.printMessage(String.valueOf(this.roundNumber));
 
     Player player = new Player();
-    HAL9000 hal9000 = new HAL9000(new RandomStrategy());
+    HAL9000 hal9000 = new HAL9000(new RandomStrategy(), difficulty);
 
     int playerAction = player.play();
     int hal9000Action = hal9000.play();
@@ -43,10 +45,10 @@ public class Game {
 
     if (playerChoice == sumOddOrEven) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-          Integer.toString(sum), playerChoice.name(), playerName);
+          Integer.toString(sum), sumOddOrEven.name(), playerName);
     } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-          Integer.toString(sum), playerChoice.name(), "HAL-9000");
+          Integer.toString(sum), sumOddOrEven.name(), "HAL-9000");
     }
   }
 
