@@ -84,9 +84,8 @@ public class Game {
   }
 
   public void showStats() {
-    int hal9000WinCount = hal9000.getWinCount();
-
     if (gameHasStarted) {
+      int hal9000WinCount = hal9000.getWinCount();
       MessageCli.PRINT_PLAYER_WINS.printMessage(
           playerName,
           Integer.toString(playerWinCount),
