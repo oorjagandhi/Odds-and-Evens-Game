@@ -7,6 +7,13 @@ public class TopStrategy implements Strategy {
   private int oddCount;
   private Choice playerChoice;
 
+  /**
+   * Create a new instance of TopStrategy.
+   *
+   * @param evenCount The number of even numbers played.
+   * @param oddCount The number of odd numbers played.
+   * @param choice The player's choice.
+   */
   public TopStrategy(int evenCount, int oddCount, Choice choice) {
     this.evenCount = evenCount;
     this.oddCount = oddCount;
@@ -14,6 +21,11 @@ public class TopStrategy implements Strategy {
   }
 
   @Override
+  /**
+   * Get the number of fingers to play.
+   *
+   * @return The number of fingers to play.
+   */
   public int getFingers() {
     // Generate a random even or odd number based on historical data
     if (playerChoice == Choice.EVEN) {

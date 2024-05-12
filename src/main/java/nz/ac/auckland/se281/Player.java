@@ -2,8 +2,12 @@ package nz.ac.auckland.se281;
 
 public class Player {
 
+  /**
+   * Play a round of the game.
+   *
+   * @return The player's choice.
+   */
   public int play() {
-
     MessageCli.ASK_INPUT.printMessage();
 
     int input = Utils.scanner.nextInt();

@@ -13,6 +13,13 @@ public class HAL9000 {
   private Choice playerChoice;
   private boolean lastRoundWon;
 
+  /**
+   * Create a new instance of HAL9000.
+   *
+   * @param strategy The strategy to use.
+   * @param difficulty The difficulty of the AI.
+   * @param playerChoice The player's choice.
+   */
   public HAL9000(Strategy strategy, Difficulty difficulty, Choice playerChoice) {
     this.strategy = strategy;
     this.evenCount = 0;
@@ -23,10 +30,20 @@ public class HAL9000 {
     this.lastRoundWon = false;
   }
 
+  /**
+   * Set the strategy to use.
+   *
+   * @param strategy The strategy to use.
+   */
   public void setStrategy(Strategy strategy) {
     this.strategy = strategy;
   }
 
+  /**
+   * Get the strategy being used.
+   *
+   * @return The strategy being used.
+   */
   public int play() {
     this.roundCount++;
     switch (this.difficulty) {
@@ -56,6 +73,12 @@ public class HAL9000 {
     return strategy.getFingers();
   }
 
+  /**
+   * Update the counts based on the result of the last round.
+   *
+   * @param fingers The number of fingers played.
+   * @param won Whether the AI won the last round.
+   */
   public void updateCounts(int fingers, boolean won) {
     if (fingers % 2 == 0) {
       evenCount++;
@@ -66,6 +89,7 @@ public class HAL9000 {
     this.lastRoundWon = won;
   }
 
+  /** Reset the counts and round number. */
   public void reset() {
     evenCount = 0;
     oddCount = 0;
@@ -73,6 +97,11 @@ public class HAL9000 {
     this.strategy = new RandomStrategy();
   }
 
+  /**
+   * Check if the strategy should be switched.
+   *
+   * @return Whether the strategy should be switched.
+   */
   public boolean shouldSwitchStrategy() {
     return roundCount == 4;
   }

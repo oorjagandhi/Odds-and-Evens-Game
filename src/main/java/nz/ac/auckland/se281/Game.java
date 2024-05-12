@@ -10,6 +10,13 @@ public class Game {
   private Choice playerChoice;
   private HAL9000 hal9000;
 
+  /**
+   * Start a new game.
+   *
+   * @param difficulty
+   * @param choice
+   * @param options
+   */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // Reset the game
     this.roundNumber = 0;
@@ -18,13 +25,14 @@ public class Game {
     this.playerName = options[0];
 
     // Create the AI based on the difficulty and choice
-    this.hal9000 = AIFactory.createAI(difficulty, choice);
+    this.hal9000 = AIFactory.createAi(difficulty, choice);
     this.hal9000.reset();
 
     // Welcome the player
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
   }
 
+  /** Play a round of the game. */
   public void play() {
     this.roundNumber++;
     MessageCli.START_ROUND.printMessage(String.valueOf(this.roundNumber));
