@@ -2,9 +2,7 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Choice;
 
-/*
- * This class represents the TopStrategy that implements the Strategy interface.
- */
+/** This class represents the TopStrategy that implements the Strategy interface. */
 public class TopStrategy implements Strategy {
   private int evenCount;
   private int oddCount;
