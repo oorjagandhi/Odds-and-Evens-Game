@@ -8,13 +8,15 @@ public class Game {
   private int roundNumber;
   private String playerName;
   private Choice playerChoice;
-  private Difficulty difficulty;
+  private HAL9000 hal9000;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     this.roundNumber = 0;
     this.playerChoice = choice;
     this.playerName = options[0];
-    this.difficulty = difficulty;
+
+    this.hal9000 = AIFactory.createAI(difficulty, choice);
+    this.hal9000.reset();
 
     // Welcome the player
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
@@ -25,23 +27,17 @@ public class Game {
     MessageCli.START_ROUND.printMessage(String.valueOf(this.roundNumber));
 
     Player player = new Player();
-    HAL9000 hal9000 = new HAL9000(new RandomStrategy(), difficulty);
 
     int playerAction = player.play();
     int hal9000Action = hal9000.play();
+
+    hal9000.updateCounts(playerAction);
 
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(playerAction));
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(hal9000Action));
 
     int sum = playerAction + hal9000Action;
-
-    Choice sumOddOrEven;
-
-    if (sum % 2 == 0) {
-      sumOddOrEven = Choice.EVEN;
-    } else {
-      sumOddOrEven = Choice.ODD;
-    }
+    Choice sumOddOrEven = (sum % 2 == 0) ? Choice.EVEN : Choice.ODD;
 
     if (playerChoice == sumOddOrEven) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(
