@@ -74,23 +74,26 @@ public class Game {
   public void endGame() {
     showStats();
     if (playerWinCount > hal9000.getWinCount()) {
-      MessageCli.PRINT_PLAYER_WINS.printMessage(playerName);
+      MessageCli.PRINT_END_GAME.printMessage(playerName);
     } else {
-      MessageCli.PRINT_PLAYER_WINS.printMessage("HAL-9000");
+      MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
     }
     gameHasStarted = false;
   }
 
   public void showStats() {
+    int hal9000WinCount = hal9000.getWinCount();
+
     if (gameHasStarted) {
       MessageCli.PRINT_PLAYER_WINS.printMessage(
           playerName,
           Integer.toString(playerWinCount),
           Integer.toString(roundNumber - playerWinCount));
+
       MessageCli.PRINT_PLAYER_WINS.printMessage(
           "HAL-9000",
-          Integer.toString(hal9000.getWinCount()),
-          Integer.toString(roundNumber - hal9000.getWinCount()));
+          Integer.toString(hal9000WinCount),
+          Integer.toString(roundNumber - hal9000WinCount));
     } else {
       MessageCli.GAME_NOT_STARTED.printMessage();
     }
