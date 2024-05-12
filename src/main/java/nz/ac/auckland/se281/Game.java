@@ -82,7 +82,7 @@ public class Game {
       MessageCli.PRINT_PLAYER_WINS.printMessage(
           "HAL-9000",
           Integer.toString(hal9000.getWinCount()),
-          Integer.toString(roundNumber - playerWinCount));
+          Integer.toString(roundNumber - hal9000.getWinCount()));
     } else {
       MessageCli.GAME_NOT_STARTED.printMessage();
     }
