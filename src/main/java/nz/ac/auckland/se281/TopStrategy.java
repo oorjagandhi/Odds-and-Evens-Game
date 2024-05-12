@@ -26,7 +26,7 @@ public class TopStrategy implements Strategy {
       }
     } else {
       if (oddCount > evenCount) {
-        return Utils.getRandomNumberRange(0, 2) * 2; // 1, 3, or 5
+        return 1 + Utils.getRandomNumberRange(0, 2) * 2; // 1, 3, or 5
       } else if (evenCount > oddCount) {
         return Utils.getRandomNumberRange(0, 2) * 2; // 0, 2, or 4
       } else {
