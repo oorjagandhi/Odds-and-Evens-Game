@@ -5,11 +5,13 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 public class HAL9000 {
   private Strategy strategy;
+  private Strategy randomStrategy = new RandomStrategy();
   private int evenCount;
   private int oddCount;
   private int roundCount;
   private Difficulty difficulty;
   private Choice playerChoice;
+  private boolean lastRoundWon;
 
   public HAL9000(Strategy strategy, Difficulty difficulty, Choice playerChoice) {
     this.strategy = strategy;
@@ -18,6 +20,7 @@ public class HAL9000 {
     this.roundCount = 0;
     this.difficulty = difficulty;
     this.playerChoice = playerChoice;
+    this.lastRoundWon = false;
   }
 
   public void setStrategy(Strategy strategy) {
@@ -26,18 +29,38 @@ public class HAL9000 {
 
   public int play() {
     this.roundCount++;
-    if (difficulty == Difficulty.MEDIUM && roundCount == 4) {
-      setStrategy(new TopStrategy(evenCount, oddCount, playerChoice));
+    switch (this.difficulty) {
+      case MEDIUM:
+        if (this.roundCount == 4) { // Switch to TopStrategy on the fourth round
+          this.strategy = new TopStrategy(evenCount, oddCount, playerChoice);
+        }
+        break;
+      case HARD:
+        if (this.roundCount > 3) { // After the third round, decide based on the last round
+          if (!lastRoundWon) { // Switch strategy if HAL9000 lost the last round
+            this.strategy =
+                this.strategy instanceof TopStrategy
+                    ? randomStrategy
+                    : new TopStrategy(evenCount, oddCount, playerChoice);
+          }
+        }
+        break;
+      case EASY:
+      default:
+        // EASY always uses RandomStrategy, no change needed
+        break;
     }
     return strategy.getFingers();
   }
 
-  public void updateCounts(int fingers) {
+  public void updateCounts(int fingers, boolean won) {
     if (fingers % 2 == 0) {
       evenCount++;
     } else {
       oddCount++;
     }
+
+    this.lastRoundWon = true;
   }
 
   public void reset() {

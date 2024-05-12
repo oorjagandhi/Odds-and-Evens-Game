@@ -34,14 +34,15 @@ public class Game {
     int playerAction = player.play();
     int hal9000Action = hal9000.play();
 
-    hal9000.updateCounts(playerAction);
-
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(playerAction));
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(hal9000Action));
 
     // Determine the winner
     int sum = playerAction + hal9000Action;
     Choice sumOddOrEven = (sum % 2 == 0) ? Choice.EVEN : Choice.ODD;
+
+    boolean playerWins = (playerChoice == sumOddOrEven);
+    hal9000.updateCounts(playerAction, !playerWins);
 
     if (playerChoice == sumOddOrEven) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(
