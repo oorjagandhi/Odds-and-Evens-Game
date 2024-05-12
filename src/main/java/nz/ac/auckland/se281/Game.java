@@ -71,7 +71,15 @@ public class Game {
     }
   }
 
-  public void endGame() {}
+  public void endGame() {
+    showStats();
+    if (playerWinCount > hal9000.getWinCount()) {
+      MessageCli.PRINT_PLAYER_WINS.printMessage(playerName);
+    } else {
+      MessageCli.PRINT_PLAYER_WINS.printMessage("HAL-9000");
+    }
+    gameHasStarted = false;
+  }
 
   public void showStats() {
     if (gameHasStarted) {
