@@ -11,10 +11,13 @@ public class Game {
   private HAL9000 hal9000;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
+    // Reset the game
     this.roundNumber = 0;
+
     this.playerChoice = choice;
     this.playerName = options[0];
 
+    // Create the AI based on the difficulty and choice
     this.hal9000 = AIFactory.createAI(difficulty, choice);
     this.hal9000.reset();
 
@@ -36,6 +39,7 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(playerAction));
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(hal9000Action));
 
+    // Determine the winner
     int sum = playerAction + hal9000Action;
     Choice sumOddOrEven = (sum % 2 == 0) ? Choice.EVEN : Choice.ODD;
 
