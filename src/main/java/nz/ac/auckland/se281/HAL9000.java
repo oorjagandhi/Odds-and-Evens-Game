@@ -10,6 +10,7 @@ public class HAL9000 {
   private int evenCount;
   private int oddCount;
   private int roundCount;
+  private int winCount;
   private Difficulty difficulty;
   private Choice playerChoice;
   private boolean lastRoundWon;
@@ -26,6 +27,7 @@ public class HAL9000 {
     this.evenCount = 0;
     this.oddCount = 0;
     this.roundCount = 0;
+    this.winCount = 0;
     this.difficulty = difficulty;
     this.playerChoice = playerChoice;
     this.lastRoundWon = false;
@@ -88,6 +90,9 @@ public class HAL9000 {
     }
 
     this.lastRoundWon = won;
+    if (won) {
+      this.winCount++; // Increment win counter if HAL9000 won the round
+    }
   }
 
   /** Reset the counts and round number. */
@@ -95,6 +100,7 @@ public class HAL9000 {
     evenCount = 0;
     oddCount = 0;
     roundCount = 0;
+    winCount = 0;
     this.strategy = new RandomStrategy();
   }
 
@@ -105,5 +111,14 @@ public class HAL9000 {
    */
   public boolean shouldSwitchStrategy() {
     return roundCount == 4;
+  }
+
+  /**
+   * Get the number of wins.
+   *
+   * @return The number of wins.
+   */
+  public int winCount() {
+    return this.winCount;
   }
 }
