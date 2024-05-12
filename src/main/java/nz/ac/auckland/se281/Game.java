@@ -11,11 +11,11 @@ public class Game {
   private HAL9000 hal9000;
 
   /**
-   * Start a new game.
+   * The new game method is called to start a new game of Odds and Evens.
    *
-   * @param difficulty
-   * @param choice
-   * @param options
+   * @param difficulty The difficulty of the AI.
+   * @param choice The player's choice (even or odd).
+   * @param options The player's name and other options.
    */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // Reset the game

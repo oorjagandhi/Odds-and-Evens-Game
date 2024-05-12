@@ -3,6 +3,7 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
 
+/** This class represents the AI in the game. It uses a strategy to play the game. */
 public class HAL9000 {
   private Strategy strategy;
   private Strategy randomStrategy = new RandomStrategy();

@@ -2,6 +2,9 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Choice;
 
+/*
+ * This class represents the TopStrategy that implements the Strategy interface.
+ */
 public class TopStrategy implements Strategy {
   private int evenCount;
   private int oddCount;
@@ -20,12 +23,12 @@ public class TopStrategy implements Strategy {
     this.playerChoice = choice;
   }
 
-  @Override
   /**
    * Get the number of fingers to play.
    *
    * @return The number of fingers to play.
    */
+  @Override
   public int getFingers() {
     // Generate a random even or odd number based on historical data
     if (playerChoice == Choice.EVEN) {

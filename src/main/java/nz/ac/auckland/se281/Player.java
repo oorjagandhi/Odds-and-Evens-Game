@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** This class represents the player in the game. */
 public class Player {
 
   /**

@@ -3,6 +3,10 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
 
+/**
+ * This class represents the AI Factory that creates an AI based on the difficulty and player
+ * choice.
+ */
 public class AIFactory {
 
   /**
