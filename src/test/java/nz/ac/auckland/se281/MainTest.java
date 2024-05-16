@@ -20,7 +20,8 @@ import org.junit.runners.Suite.SuiteClasses;
   MainTest.Task2.class,
   MainTest.Task3.class,
   MainTest.Task4.class,
-  // MainTest.Task5.class
+  MainTest.Task5.class,
+  MainTest.YourTests.class
 })
 public class MainTest {
 
@@ -786,6 +787,34 @@ public class MainTest {
     }
 
     @Test
-    public void yourtest() throws Exception {}
+    public void T1_05_play_ask_for_input_wrong_two() throws Exception {
+      runCommands(
+          NEW_GAME + " EASY ODD",
+          "Valerio",
+          //
+          PLAY,
+          "-9",
+          "xge",
+          "3");
+      assertContains(START_ROUND.getMessage("1"));
+      assertContains(ASK_INPUT.getMessage());
+      assertContains(INVALID_INPUT.getMessage());
+      int result = MainTest.getPlay(1, "Valerio", getCaptureOut());
+      assertEquals(3, result);
+    }
+
+    @Test
+    public void T1_05_play_ask_for_input_wrong_three() throws Exception {
+      runCommands(
+          NEW_GAME + " EASY ODD",
+          "Valerio",
+          //
+          PLAY,
+          "abc",
+          "0");
+      assertContains(START_ROUND.getMessage("1"));
+      assertContains(ASK_INPUT.getMessage());
+      assertContains(INVALID_INPUT.getMessage());
+    }
   }
 }

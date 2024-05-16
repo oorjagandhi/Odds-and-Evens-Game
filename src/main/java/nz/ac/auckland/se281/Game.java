@@ -8,7 +8,7 @@ public class Game {
   private int roundNumber;
   private String playerName;
   private Choice playerChoice;
-  private HAL9000 hal9000;
+  private Bot bot;
   private boolean gameHasStarted;
   private int playerWinCount;
 
@@ -30,8 +30,8 @@ public class Game {
     playerWinCount = 0;
 
     // Create the AI based on the difficulty and choice
-    this.hal9000 = AIFactory.createAi(difficulty, choice);
-    this.hal9000.reset();
+    this.bot = AIFactory.createAi(difficulty, choice);
+    this.bot.reset();
 
     // Welcome the player
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
@@ -50,7 +50,7 @@ public class Game {
 
       // Play the moves for the player and HAL-9000
       int playerAction = player.play();
-      int hal9000Action = hal9000.play();
+      int hal9000Action = bot.play();
 
       // Print the moves
       MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(playerAction));
@@ -61,7 +61,7 @@ public class Game {
       Choice sumOddOrEven = (sum % 2 == 0) ? Choice.EVEN : Choice.ODD;
 
       boolean playerWins = (playerChoice == sumOddOrEven);
-      hal9000.updateCounts(playerAction, !playerWins);
+      bot.updateCounts(playerAction, !playerWins);
 
       // Print the outcome of the round
       if (playerWins) {
@@ -83,9 +83,9 @@ public class Game {
     // Show the statistics of the game
     showStats();
     // Print the winner of the game
-    if (playerWinCount > hal9000.getWinCount()) {
+    if (playerWinCount > bot.getWinCount()) {
       MessageCli.PRINT_END_GAME.printMessage(playerName);
-    } else if (hal9000.getWinCount() > playerWinCount) {
+    } else if (bot.getWinCount() > playerWinCount) {
       MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
     } else {
       MessageCli.PRINT_END_GAME_TIE.printMessage();
@@ -99,7 +99,7 @@ public class Game {
   public void showStats() {
     // Show the statistics of the game if it has started
     if (gameHasStarted) {
-      int hal9000WinCount = hal9000.getWinCount();
+      int hal9000WinCount = bot.getWinCount();
       MessageCli.PRINT_PLAYER_WINS.printMessage(
           playerName,
           Integer.toString(playerWinCount),

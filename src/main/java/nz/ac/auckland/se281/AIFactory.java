@@ -16,16 +16,16 @@ public class AIFactory {
    * @param playerChoice The player's choice.
    * @return The AI.
    */
-  public static HAL9000 createAi(Difficulty difficulty, Choice playerChoice) {
+  public static Bot createAi(Difficulty difficulty, Choice playerChoice) {
     switch (difficulty) {
       case MEDIUM:
-        return new HAL9000(new RandomStrategy(), Difficulty.MEDIUM, playerChoice);
+        return new MediumBot(playerChoice);
       case HARD:
-        return new HAL9000(new RandomStrategy(), Difficulty.HARD, playerChoice);
+        return new HardBot(playerChoice);
       case EASY:
         // Default to EASY
       default:
-        return new HAL9000(new RandomStrategy(), Difficulty.EASY, playerChoice);
+        return new EasyBot(playerChoice);
     }
   }
 }

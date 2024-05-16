@@ -4,16 +4,16 @@ import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
 
 /** This class represents the AI in the game. It uses a strategy to play the game. */
-public class HAL9000 implements GameParticipant {
-  private Strategy strategy;
-  private Strategy randomStrategy = new RandomStrategy();
-  private int evenCount;
-  private int oddCount;
-  private int roundCount;
-  private int winCount;
-  private Difficulty difficulty;
-  private Choice playerChoice;
-  private boolean lastRoundWon;
+public abstract class HAL9000 implements GameParticipant, Bot {
+  protected Strategy strategy;
+  protected Strategy randomStrategy = new RandomStrategy();
+  protected int evenCount;
+  protected int oddCount;
+  protected int roundCount;
+  protected int winCount;
+  protected Difficulty difficulty;
+  protected Choice playerChoice;
+  protected boolean lastRoundWon;
 
   /**
    * Create a new instance of HAL9000.
@@ -43,40 +43,6 @@ public class HAL9000 implements GameParticipant {
   }
 
   /**
-   * Get the strategy being used.
-   *
-   * @return The strategy being used.
-   */
-  public int play() {
-    this.roundCount++;
-    switch (this.difficulty) {
-      case MEDIUM:
-        if (this.roundCount == 4) { // Switch to TopStrategy on the fourth round
-          this.strategy = new TopStrategy(evenCount, oddCount, playerChoice);
-        }
-        break;
-      case HARD:
-        if (this.roundCount > 3) { // After the third round, decide based on the last round
-          if (!lastRoundWon) { // Switch strategy if HAL9000 lost the last round
-            if (this.strategy instanceof TopStrategy) {
-              // If the current strategy is TopStrategy, switch to RandomStrategy
-              this.strategy = randomStrategy;
-            } else {
-              // If the current strategy is not TopStrategy, switch to a new instance of TopStrategy
-              this.strategy = new TopStrategy(evenCount, oddCount, playerChoice);
-            }
-          }
-        }
-        break;
-      case EASY:
-      default:
-        // EASY always uses RandomStrategy, no change needed
-        break;
-    }
-    return strategy.getFingers();
-  }
-
-  /**
    * Update the counts based on the result of the last round.
    *
    * @param fingers The number of fingers played.
@@ -96,6 +62,7 @@ public class HAL9000 implements GameParticipant {
   }
 
   /** Reset the counts and round number. */
+  @Override
   public void reset() {
     evenCount = 0;
     oddCount = 0;
