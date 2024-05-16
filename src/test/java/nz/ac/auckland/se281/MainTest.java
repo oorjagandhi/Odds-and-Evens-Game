@@ -787,7 +787,7 @@ public class MainTest {
     }
 
     @Test
-    public void T1_05_play_ask_for_input_wrong_two() throws Exception {
+    public void T1_01_play_ask_for_input_wrong_two() throws Exception {
       runCommands(
           NEW_GAME + " EASY ODD",
           "Valerio",
@@ -804,7 +804,7 @@ public class MainTest {
     }
 
     @Test
-    public void T1_05_play_ask_for_input_wrong_three() throws Exception {
+    public void T1_02_play_ask_for_input_wrong_three() throws Exception {
       runCommands(
           NEW_GAME + " EASY ODD",
           "Valerio",
