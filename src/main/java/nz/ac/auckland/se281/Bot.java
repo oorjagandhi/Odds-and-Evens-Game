@@ -5,24 +5,24 @@ public interface Bot {
   // Define methods here
 
   /**
-   * Play a round of the game.
+   * Play a round of the game, returning the number of fingers played.
    *
    * @return The number of fingers played.
    */
   public int play();
 
-  /** Reset the bot. */
+  /** This method resets the bot by setting all counts to zero and the strategy to Random. */
   public void reset();
 
   /**
-   * Get the win count.
+   * Get the win count of the bot, based on the fingers played and whether the bot won or not.
    *
    * @return The number of wins.
    */
   public int getWinCount();
 
   /**
-   * Update the counts.
+   * Update the counts of the bot, based on the fingers played and whether the bot won or not.
    *
    * @param fingers The number of fingers played.
    * @param won Whether the bot won or not.

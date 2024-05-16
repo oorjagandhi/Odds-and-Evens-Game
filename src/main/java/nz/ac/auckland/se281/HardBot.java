@@ -17,11 +17,15 @@ public class HardBot extends HAL9000 {
   @Override
   public int play() {
     roundCount++;
+
+    // After three rounds, check if the last round was lost. If it was, change the strategy.
     if (roundCount > 3) {
       if (!lastRoundWon) {
         if (this.strategy instanceof TopStrategy) {
+          // If the last strategy was TopStrategy, change to RandomStrategy
           setStrategy(new RandomStrategy());
         } else {
+          // If the last strategy was RandomStrategy, change to TopStrategy
           setStrategy(new TopStrategy(evenCount, oddCount, playerChoice));
         }
       }
