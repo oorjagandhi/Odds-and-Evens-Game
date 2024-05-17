@@ -29,7 +29,11 @@ public class HardBot extends HAL9000 {
           setStrategy(new TopStrategy(evenCount, oddCount, playerChoice));
         }
       }
+    } else if (this.strategy
+        instanceof TopStrategy) { // If the current strategy is TopStrategy, update the counts
+      setStrategy(new TopStrategy(evenCount, oddCount, playerChoice));
     }
+
     return strategy.getFingers();
   }
 }

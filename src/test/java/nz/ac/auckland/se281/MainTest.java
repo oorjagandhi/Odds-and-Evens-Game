@@ -816,5 +816,133 @@ public class MainTest {
       assertContains(ASK_INPUT.getMessage());
       assertContains(INVALID_INPUT.getMessage());
     }
+
+    @Test
+    public void T4_02_play_win_random_and_top_odd() throws Exception {
+      Utils.random = new java.util.Random(1);
+      runCommands(
+          NEW_GAME + " HARD ODD",
+          "Valerio",
+          //
+          PLAY,
+          "2",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "4",
+          //
+          PLAY,
+          "2",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "3");
+      assertContains(START_ROUND.getMessage("6"));
+      assertContains(ASK_INPUT.getMessage());
+      int res = MainTest.getPlay(1, "Valerio", getCaptureOut());
+      assertEquals(2, res);
+      res = MainTest.getPlay(6, "HAL-9000", getCaptureOut());
+      assertTrue(Utils.isEven(res));
+    }
+
+    @Test
+    public void T4_02_even_eq_odd_odd() throws Exception {
+      Utils.random = new java.util.Random(1);
+      runCommands(
+          NEW_GAME + " HARD ODD",
+          "Valerio",
+          //
+          PLAY,
+          "3",
+          //
+          PLAY,
+          "2",
+          //
+          PLAY,
+          "5",
+          //
+          PLAY,
+          "2",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "3");
+      assertContains(START_ROUND.getMessage("6"));
+      assertContains(ASK_INPUT.getMessage());
+      int res = MainTest.getPlay(1, "Valerio", getCaptureOut());
+      assertEquals(3, res);
+      res = MainTest.getPlay(6, "HAL-9000", getCaptureOut());
+      assertTrue(Utils.isEven(res));
+    }
+
+    @Test
+    public void T4_02_play_win_random_and_top_even() throws Exception {
+      Utils.random = new java.util.Random(1);
+      runCommands(
+          NEW_GAME + " HARD EVEN",
+          "Valerio",
+          //
+          PLAY,
+          "2",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "4",
+          //
+          PLAY,
+          "3",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "3");
+      assertContains(START_ROUND.getMessage("6"));
+      assertContains(ASK_INPUT.getMessage());
+      int res = MainTest.getPlay(1, "Valerio", getCaptureOut());
+      assertEquals(2, res);
+      res = MainTest.getPlay(6, "HAL-9000", getCaptureOut());
+      assertTrue(Utils.isEven(res));
+    }
+
+    @Test
+    public void T4_02_even_eq_odd_even() throws Exception {
+      Utils.random = new java.util.Random(1);
+      runCommands(
+          NEW_GAME + " HARD EVEN",
+          "Valerio",
+          //
+          PLAY,
+          "3",
+          //
+          PLAY,
+          "2",
+          //
+          PLAY,
+          "5",
+          //
+          PLAY,
+          "2",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "3");
+      assertContains(START_ROUND.getMessage("6"));
+      assertContains(ASK_INPUT.getMessage());
+      int res = MainTest.getPlay(1, "Valerio", getCaptureOut());
+      assertEquals(3, res);
+      res = MainTest.getPlay(6, "HAL-9000", getCaptureOut());
+      assertTrue(Utils.isEven(res));
+    }
   }
 }
