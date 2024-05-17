@@ -23,7 +23,7 @@ public class MediumBot extends HAL9000 {
   @Override
   public int play() {
     roundCount++;
-    if (roundCount == 4) {
+    if (roundCount > 3) {
       setStrategy(new TopStrategy(evenCount, oddCount, playerChoice));
     }
     return strategy.getFingers();
