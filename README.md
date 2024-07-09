@@ -12,7 +12,7 @@ The Odds and Events is a Java-based application which includes various AI implem
 To run this project, ensure you have Java installed on your machine. Follow the steps below to set up and run the project:
 
 1.  Clone the repository:
-`git clone https://github.com/your-username/venue-hire-system.git` 
+`git clone https://github.com/your-username/odds-and-evens-game.git` 
 
 2.  Navigate to the project directory:
 `cd venue-hire-system` 
