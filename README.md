@@ -15,7 +15,7 @@ To run this project, ensure you have Java installed on your machine. Follow the 
 `git clone https://github.com/your-username/odds-and-evens-game.git` 
 
 2.  Navigate to the project directory:
-`cd venue-hire-system` 
+`cd odds-and-evens-game` 
 
 3.  Compile the Java files:
 `javac *.java` 
